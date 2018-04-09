@@ -1,0 +1,153 @@
+import requests
+
+# Read in the data and store in nxn matrix
+filename = 'https://raw.githubusercontent.com/mcvvina/HousingPrices/master/train.csv'
+
+response = requests.get(filename)
+csvData = response.text.split("\n")
+csvData = [eachLine.split(',') for eachLine in csvData if len(eachLine)>0]
+
+# Store attribute name list and delete from the rest of the data
+attributes = csvData[0]
+#print(csvData[0])
+del csvData[0]
+
+#Define possible values for each attribute
+posId = []
+posMSSubClass=['20', '30', '40', '45', '50', '60', '70', '75', '80', '85', '90', '120', '150', '160', '180', '190']
+posMSZoning=['A', 'C', 'FV', 'I', 'RH', 'RL', 'RP', 'RM']
+posLotFrontage=[]
+posLotArea=[]
+posStreet=['Grvl', 'Pave']
+posAlley=['Grvl', 'Pave', 'NA']
+posLotShape=['Reg', 'IR1', 'IR2', 'IR3']
+posLandContour=['Lvl', 'Bnk', 'HLS', 'Low']
+posUtilities=['AllPub', 'NoSewr', 'NoSeWa', 'ELO']
+posLotConfig=['Inside', 'Corner', 'CulDSac', 'FR2', 'FR3']
+posLandSlope=['Gtl', 'Mod', 'Sev']
+posNeighborhood=['Blmngtn', 'Blueste', 'BrDale', 'BrkSide', 'ClearCr', 'CollgCr', 'Crawfor', 'Edwards', 'Gilbert', 'IDOTRR', 'MeadowV', 'Mitchel', 'Names', 'NoRidge', 'NPkVill', 'NridgHt', 'NWAmes', 'OldTown', 'SWISU', 'Sawyer', 'SawyerW', 'Somerst', 'StoneBr', 'Timber', 'Veenker']
+posCondition1=['Artery', 'Feedr', 'Norm', 'RRNn', 'RRAn', 'PosN', 'PosA', 'RRNe', 'RRAe']
+posCondition2=['Artery', 'Feedr', 'Norm', 'RRNn', 'RRAn', 'PosN', 'PosA', 'RRNe', 'RRAe']
+posBldgType=['1Fam', '2FmCon', 'Duplx', 'TwnhsE', 'TwnhsI']
+posHouseStyle=['1Story','1.5Fin','1.5Unf','2Story','2.5Fin','2.5Unf','SFoyer', 'SLvl']
+posOverallQual=['10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+posOverallCond=['10', '9', '8', '7', '6', '5', '4', '3', '2', '1']
+posYearBuilt=[]
+posYearRemodAdd=[]
+posRoofStyle=['Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed']
+posRoofMatl=['ClyTile', 'CompShg', 'Membran', 'Metal', 'Roll', 'Tar&Grv', 'WdShake', 'WdShngl']
+posExterior1st=['AsbShng', 'AsphShn', 'BrkComm', 'BrkFace', 'CBlock', 'CemntBd', 'HdBoard', 'ImStucc', 'MetalSd', 'Other', 'Plywood', 'PreCast', 'Stone', 'Stucco', 'VinylSd', 'Wd Sdng', 'WdShing']
+posExterior2nd=['AsbShng', 'AsphShn', 'BrkComm', 'BrkFace', 'CBlock', 'CemntBd', 'HdBoard', 'ImStucc', 'MetalSd', 'Other', 'Plywood', 'PreCast', 'Stone', 'Stucco', 'VinylSd', 'Wd Sdng', 'WdShing']
+posMasVnrType=['BrkCmn', 'BrkFace', 'CBlock', 'None', 'Stone']
+posMasVnrArea=[]
+posExterQual=['Ex', 'Gd', 'TA', 'Fa', 'Po']
+posExterCond=['Ex', 'Gd', 'TA', 'Fa', 'Po']
+posFoundation=['BrkTil', 'CBlock', 'PConc', 'Slab', 'Stone', 'Wood']
+posBsmtQual=['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+posBsmtCond=['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+posBsmtExposure=['Gd', 'Av', 'Mn', 'No', 'NA']
+posBsmtFinType1=['GLQ', 'ALQ', 'BLQ', 'Rec', 'LwQ', 'Unf', 'NA']
+posBsmtFinSF1=[]
+posBsmtFinType2=['GLQ', 'ALQ', 'BLQ', 'Rec', 'LwQ', 'Unf', 'NA']
+posBsmtFinSF2=[]
+posBsmtUnfSF=[]
+posTotalBsmtSF=[]
+posHeating=['Floor', 'GasA', 'GasW', 'Grav', 'OthW', 'Wall']
+posHeatingQC=['Ex', 'Gd', 'TA', 'Fa', 'Po']
+posCentralAir=['N', 'Y']
+posElectrical=['SBrkr', 'FuseA', 'FuseF', 'FuseP', 'Mix']
+pos1stFlrSF=[]
+pos2ndFlrSF=[]
+posLowQualFinSF=[]
+posGrLivArea=[]
+posBsmtFullBath=[]
+posBsmtHalfBath=[]
+posFullBath=[]
+posHalfBath=[]
+posBedroom=[]
+posKitchen=[]
+posKitchenQual=['Ex', 'Gd', 'TA', 'Fa', 'Po']
+posTotRmsAbvGrd=[]
+posFunctional=['Typ', 'Min1', 'Min2', 'Mod', 'Maj1', 'Maj2', 'Sev', 'Sal']
+posFireplaces=[]
+posFireplaceQu=['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+posGarageType=['2Types', 'Attchd', 'Basment', 'BuiltIn', 'CarPort', 'Detchd', 'NA']
+posGarageYrBlt=[]
+posGarageFinish=['Fin', 'RFn', 'Unf', 'NA']
+posGarageCars=[]
+posGarageArea=[]
+posGarageQual=['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+posGarageCond=['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NA']
+posPavedDrive=['Y', 'P', 'N']
+posWoodDeckSF=[]
+posOpenPorchSF=[]
+posEnclosedPorch=[]
+pos3SsnPorch=[]
+posScreenPorch=[]
+posPoolArea=[]
+posPoolQC=['Ex', 'Gd', 'TA', 'Fa', 'NA']
+posFence=['GdPrv', 'MnPrv', 'GdWo', 'MnWw', 'NA']
+posMiscFeature=['Elev', 'Gar2', 'Othr', 'Shed', 'TenC', 'NA']
+posMiscVal=[]
+posMoSold=[]
+posYrSold=[]
+posSaleType=['WD', 'CWD', 'VWD', 'New', 'COD', 'Con', 'ConLw', 'ConLI', 'ConLD', 'Oth']
+posSaleCondition=['Normal', 'Abnorml', 'AdjLand', 'Alloca', 'Family', 'Partial']
+### NEEDED FOR TRAIN FILE
+posSales = []
+
+# Create 2D list
+allPossData = [posId,posMSSubClass, posMSZoning, posLotFrontage, posLotArea, posStreet, posAlley, posLotShape, posLandContour, posUtilities, posLotConfig, posLandSlope, posNeighborhood, posCondition1, posCondition2, posBldgType, posHouseStyle, posOverallQual, posOverallCond, posYearBuilt, posYearRemodAdd, posRoofStyle, posRoofMatl, posExterior1st, posExterior2nd, posMasVnrType, posMasVnrArea, posExterQual, posExterCond, posFoundation, posBsmtQual, posBsmtCond, posBsmtExposure, posBsmtFinType1, posBsmtFinSF1, posBsmtFinType2, posBsmtFinSF2, posBsmtUnfSF, posTotalBsmtSF, posHeating, posHeatingQC, posCentralAir, posElectrical, pos1stFlrSF, pos2ndFlrSF, posLowQualFinSF, posGrLivArea, posBsmtFullBath, posBsmtHalfBath, posFullBath, posHalfBath, posBedroom, posKitchen, posKitchenQual, posTotRmsAbvGrd, posFunctional, posFireplaces, posFireplaceQu, posGarageType, posGarageYrBlt, posGarageFinish, posGarageCars, posGarageArea, posGarageQual, posGarageCond, posPavedDrive, posWoodDeckSF, posOpenPorchSF, posEnclosedPorch, pos3SsnPorch, posScreenPorch, posPoolArea, posPoolQC, posFence, posMiscFeature, posMiscVal, posMoSold, posYrSold, posSaleType, posSaleCondition, posSales]
+
+
+# Creates Frequency List of same size as all Poss Data consisting of empty Lists
+freqData = [ [] for ea in allPossData]
+
+#Populates freqData
+for eachHouse in csvData:
+    for index,eachType in enumerate(eachHouse):
+      #  print (str(index) +" " + str(eachType))
+        if len(allPossData[index]) == []:
+            if len(freqData)<=index:
+                freqData.append([]) 
+            continue
+        
+        posValues = allPossData[index]
+        if len(freqData[index])<len(posValues):
+            freqData[index] = [0 for elm in posValues]
+        for elInd,element in enumerate(posValues):
+            if element == eachType:
+                freqData[index][elInd] += 1
+
+## Prints frequencies for human visualization (be aware of values being cut off and continued on following line) BEST VIEWED FULL SCREEN
+stringFormat= "{name:15} | {posValues:50} | {frequencies:50}"
+
+print(stringFormat.format(name = "Attribute", posValues = "Possible Values", frequencies = "Frequencies"))
+
+print("-"*115)
+
+for ind,each in enumerate(freqData):
+    length = len(str(allPossData[ind]))
+    printFrom = 0
+    printTo = 50
+    times = 0
+    posVal = str(allPossData[ind])
+    freq = str(each)
+    while(length > 50):
+        if times ==0:
+            print(stringFormat.format(name = attributes[ind], posValues = posVal[printFrom:printTo], frequencies = freq[printFrom:printTo]))
+            
+        else:
+            
+            print(stringFormat.format(name = " ", posValues = posVal[printFrom:printTo], frequencies = freq[printFrom:printTo]))
+            
+        printFrom +=50
+        printTo+=50
+        length -=50
+        times+=1
+    if times>0:
+        
+        print(stringFormat.format(name = " ", posValues = posVal[printFrom:printTo], frequencies = freq[printFrom:printTo]))
+    else:
+        print(stringFormat.format(name = attributes[ind], posValues = posVal[printFrom:printTo], frequencies = freq[printFrom:printTo]))
+    print("-"*115)
