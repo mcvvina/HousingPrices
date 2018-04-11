@@ -4,20 +4,6 @@
 # frequencies: is a module to allow the use of freqData, attributes, csvData, allPosData, and the possibility to print the freqData from other files
 
 
-
-### NOTES ###
-# To use: "import frequencies"
-# var = frequencies.frequencies() for train data
-# var = frequencies.frequencies(/pathto/testFile) for test data
-# var.printFrequencies() Prints frequencies
-# print(var.attributes()) prints attributes
-# etc.
-
-
-### POTENTIAL FUTURE CHANGES ###
-# If we decide to descritize the continuous values, that can be implemented here and not need to be repeated elsewhere
-
-
 import requests
 
 
@@ -26,7 +12,7 @@ import requests
 ## Attributes:
 #### csvData = list form of all data exluding attribute names
 #### attributes = list of attribute names
-#### allPosData = list of lists of all possible nominal data
+#### allPossData = list of lists of all possible nominal data
 #### freqData = list of lists of frequency of each nominal data
 ## Functions
 #### printFrequencies = prints formatted list of frequencies
@@ -41,10 +27,18 @@ class frequencies:
         self.csvData = response.text.split("\n")
         self.csvData = [eachLine.split(',') for eachLine in self.csvData if len(eachLine)>0]
 
+
+        
+
         # Store attribute name list and delete from the rest of the data
         self.attributes = self.csvData[0]
         #print(csvData[0])
         del self.csvData[0]
+
+
+        #To store each attribute as a row and each house as a column
+        self.attributeData = [ [] for each in self.attributes]
+
 
         #Define possible values for each attribute
         posId = []
@@ -146,20 +140,31 @@ class frequencies:
 
         #print(csvData[0])
         for eachHouse in self.csvData:
+
+            
             for index,eachType in enumerate(eachHouse):
-              #  print (str(index) +" " + str(eachType))
+                
+                ### Generate Frequencise
                 if len(self.allPossData[index]) == []:
                     if len(self.freqData)<=index:
                         self.freqData.append([]) 
                     continue
-                
                 posValues = self.allPossData[index]
                 if len(self.freqData[index])<len(posValues):
                     self.freqData[index] = [0 for elm in posValues]
                 for elInd,element in enumerate(posValues):
                     if element == eachType:
                         self.freqData[index][elInd] += 1
-                        
+
+                ### Generate attributeData
+                if self.allPossData[index] ==[]:
+##                    print(eachHouse[index])
+##                    print(eachHouse)
+                    if eachHouse[index] == 'NA':
+                        pass
+                    else:
+                        self.attributeData[index].append(int(eachHouse[index]))
+   
 
 
     def printFrequencies(self):
@@ -193,4 +198,14 @@ class frequencies:
             else:
                 print(stringFormat.format(name =self.attributes[ind], posValues = posVal[printFrom:printTo], frequencies = freq[printFrom:printTo]))
             print("-"*115)
-
+    def help(self):
+        print("""
+## Inputs: filename, default=https://raw.githubusercontent.com/mcvvina/HousingPrices/master/train.csv
+## Attributes:
+#### csvData = list form of all data exluding attribute names
+#### attributes = list of attribute names
+#### allPossData = list of lists of all possible nominal data
+#### freqData = list of lists of frequency of each nominal data
+## Functions
+#### printFrequencies = prints formatted list of frequencies
+""")
