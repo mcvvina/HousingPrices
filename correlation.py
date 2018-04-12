@@ -1,51 +1,36 @@
-# CSC 240 Data Mining Final Project
-# Spring 2018
-# Jack Dalton, Mcvvina Lin
-# data cleaning - removing variables using Pearson's correlation coefficient
+import numpy as np
+import frequencies
+from scipy import stats
+import normalize
+import matplotlib.pyplot as plt
 
-# import numpy
+def correlat(freq, limit):
+    #freq = frequencies.frequencies()
 
-filename = "train.csv"
-numlines = 0
+    normData = normalize.normalize(freq.attributeData, freq.allPossData)
 
-file = open(filename,"r")
-headers = file.readline().strip("\n").split(",")  # get list of variable names from first line
-file.close()
+    #print(freq.attributeData[1])
+    toCorrelate =  np.array(normData)
 
-data = {}  # key = variable name, value = list of data
-# inconsistent = set()  # set of indices of inconsistent data
-with open(filename) as f:
-    next(f)  # skip first line
-    for line in f:  # iterate through each line in file
-        values = line.split(",")  # list of attribute values in each line
-        index = 0
-        for value in values:  # skip non-integer values
-            header = str(headers[index])
-            
-        #     while True:
-        #       num = -1  # initialize
-        #         header = str(headers[index])
-        #         try:  # integer value
-        #             num = int(value)  # throws exception if not integer
-        #
-        #             data.setdefault(header,[]).append(num)
-        #             break
-        #         except:  # non-integer value
-        #             if header in data:
-        #                 data[header].append(str(-1))
-        #                 inconsistent.add(index)
-        #             break
-            index = index + 1
-        numlines = numlines + 1
+    ##for each in toCorrelate:
+    ##    print(type(each[0]))
+    #print(toCorrelate[0])
 
-# remove inconsistent data
-# for i in inconsistent:
-#     for var in data:
-#         del data[var][i]
+    correlationValues = [ [] for each in freq.attributeData]
+    for ind, each in enumerate(toCorrelate):
+       # print('-'*30)
+       # print(str(ind) +" "+ str(freq.attributes[ind]))
+        corrs = np.corrcoef(toCorrelate[ind], freq.attributeData[len(freq.attributeData)-1])    
+        #print(corrs)
+        correlationValues[ind] = corrs[[0],[1]]
 
-for i in data.items():
-    print(str(i[0]), str(len(i[1])))
-    # if len(i[1]) < numlines:
+    ##plt.scatter(toCorrelate[1], freq.attributeData[len(freq.attributeData)-1])
+    ##plt.show()
+    mostCorrelated = []
+    for i,each in enumerate(correlationValues):
+        if abs(each) >= abs(limit): #greater than (limit) correlation
+            mostCorrelated.append([i, each])
+            print(freq.attributes[i])
+    #print(mostCorrelated)
+    return mostCorrelated
 
-
-# numpy.corrcoeff()
