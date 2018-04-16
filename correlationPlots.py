@@ -9,7 +9,10 @@ import normalize
 ### Plots the normalized data to the sales price to visually show correlation
 
 freq = frequencies.frequencies()
-corr = correlation.correlat(freq, .6)
+corr = correlation.correlat(freq, .6, prints=True)
+##corrAttributeNames = [ freq.attributes[each[0]] for each in corr]
+##del corrAttributeNames[len(corrAttributeNames)-1]
+##print(corrAttributeNames)
 correlationIndices = [ each[0] for each in corr]
 
 histogram.histograms(freq,  indicesToPlot = correlationIndices)

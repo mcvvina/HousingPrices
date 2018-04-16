@@ -83,16 +83,31 @@ def normalize(toNorm, posValues):
                 difference.append(pow((each - mean),2))
             
             std = math.sqrt( sum(difference)/(leng-1) )
-            zscores = [  ((each - mean)/std) for each in ar if each!= -9999999]
+##            if std ==0:
+##                print(posValues[ind])
+##                print(eachAttribute)
+            zscores =[]
+            for each in ar:
+                if each !=-9999999 and std !=0:
+                    zscores.append(((each - mean)/std))
+                elif std ==0:
+                    zscores.append(0)
+            
+          #  zscores = [  ((each - mean)/std) for each in ar if each!= -9999999]
             maxx = max(zscores)
             
             minn = min(zscores)
 
-            
+            toReturn[ind] = []
+            for each in zscores:
+               if each ==0:
+                   toReturn[ind].append(0)
+               else:
+                    toReturn[ind].append( ( (each -minn)/(maxx-minn))*(1+1)-1 )
                     
 
             
-            toReturn[ind] = [  ( (each -minn)/(maxx-minn))*(1+1)-1    for each in zscores]
+           # toReturn[ind] = [  ( (each -minn)/(maxx-minn))*(1+1)-1    for each in zscores]
             
     return toReturn
 

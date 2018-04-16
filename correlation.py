@@ -4,7 +4,7 @@ from scipy import stats
 import normalize
 import matplotlib.pyplot as plt
 
-def correlat(freq, limit):
+def correlat(freq, limit, prints = False):
     #freq = frequencies.frequencies()
 
     normData = normalize.normalize(freq.attributeData, freq.allPossData)
@@ -27,10 +27,12 @@ def correlat(freq, limit):
     ##plt.scatter(toCorrelate[1], freq.attributeData[len(freq.attributeData)-1])
     ##plt.show()
     mostCorrelated = []
+    ### [index, correlation percent]
     for i,each in enumerate(correlationValues):
         if abs(each) >= abs(limit): #greater than (limit) correlation
             mostCorrelated.append([i, each])
-            print(freq.attributes[i])
+            if prints == True:
+                print(freq.attributes[i])
     #print(mostCorrelated)
     return mostCorrelated
 
