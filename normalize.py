@@ -1,3 +1,9 @@
+# CSC 240 Data Mining Final Project
+# Spring 2018
+# Jack Dalton, Mcvvina Lin
+# normalize method: normalizes data by assigning z-scores to data points
+#   based on whether they are integer or nominal values
+
 import math
 import sys
 

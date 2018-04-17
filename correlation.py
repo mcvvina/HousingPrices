@@ -1,3 +1,8 @@
+# CSC 240 Data Mining Final Project
+# Spring 2018
+# Jack Dalton, Mcvvina Lin
+# correlat method: returns list of correlated values based on a threshold for correlation
+
 import numpy as np
 import frequencies
 from scipy import stats

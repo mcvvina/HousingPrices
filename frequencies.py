@@ -2,8 +2,8 @@
 # Spring 2018
 # Jack Dalton, Mcvvina Lin
 # frequencies: is a module to allow the use of attributeData, freqData,
-# attributes, csvData, allPossData, and the possibility to print the
-# freqData from other files
+#   attributes, csvData, allPossData, and the possibility to print the
+#   freqData from other files
 
 
 import requests

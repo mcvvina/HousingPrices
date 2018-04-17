@@ -1,12 +1,14 @@
+# CSC 240 Data Mining Final Project
+# Spring 2018
+# Jack Dalton, Mcvvina Lin
+# Plots the histograms of the data that is correlated to sales price
+# Plots the normalized data to the sales price to visually show correlation
+
 import frequencies
 import correlation
 import histogram
 import matplotlib.pyplot as plt
 import normalize
-
-
-# Plots the histograms of the data that is correlated to sales price
-# Plots the normalized data to the sales price to visually show correlation
 
 freq = frequencies.frequencies()
 corr = correlation.correlat(freq, .6, prints=True)

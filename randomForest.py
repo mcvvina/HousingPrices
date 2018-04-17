@@ -1,3 +1,8 @@
+# CSC 240 Data Mining Final Project
+# Spring 2018
+# Jack Dalton, Mcvvina Lin
+# 
+
 import frequencies
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
