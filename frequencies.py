@@ -39,7 +39,7 @@ class frequencies:
         #To store each attribute as a row and each house as a column
         self.attributeData = [ [] for each in self.attributes]
 
-
+        
         #Define possible values for each attribute
         posId = []
         posMSSubClass=['20', '30', '40', '45', '50', '60', '70', '75', '80', '85', '90', '120', '150', '160', '180', '190']
@@ -214,12 +214,23 @@ class frequencies:
             print("-"*115)
     def help(self):
         print("""
-## Inputs: filename, default=https://raw.githubusercontent.com/mcvvina/HousingPrices/master/train.csv
-## Attributes:
-#### csvData = list form of all data exluding attribute names
-#### attributes = list of attribute names
-#### allPossData = list of lists of all possible nominal data
-#### freqData = list of lists of frequency of each nominal data
-## Functions
-#### printFrequencies = prints formatted list of frequencies
-""")
+            ## Inputs: filename, default=https://raw.githubusercontent.com/mcvvina/HousingPrices/master/train.csv
+            ## Attributes:
+            #### csvData = list form of all data exluding attribute names
+            #### attributes = list of attribute names
+            #### allPossData = list of lists of all possible nominal data
+            #### freqData = list of lists of frequency of each nominal data
+            ## Functions
+            #### printFrequencies = prints formatted list of frequencies
+            """)
+    def copy(self):
+        freturn = frequencies()
+        freturn.attributes= self.attributes
+        freturn.attributeData = self.attributeData
+        freturn.csvData = self.csvData
+        freturn.allPossData = self.allPossData
+        freturn.freqData = self.freqData
+        return freturn
+    def deepcopy(self):
+        freturn = self.copy()
+        return freturn

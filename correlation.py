@@ -3,34 +3,57 @@ import frequencies
 from scipy import stats
 import normalize
 import matplotlib.pyplot as plt
+import removeOutlier as ro
+import copy
 
-def correlat(freq, limit):
-    #freq = frequencies.frequencies()
+def correlat(freq, limit, prints = False, removeOutliers = False, normalizedData= []):
+    freq = freq.copy()
+    if normalizedData == []:
+        ### Normalize Data
+        normData = normalize.normalize(freq.attributeData, freq.allPossData)
+    else:
+        normData = copy.deepcopy(normalizedData)
+    
 
-    normData = normalize.normalize(freq.attributeData, freq.allPossData)
-
-    #print(freq.attributeData[1])
+    if removeOutliers == True:
+        #print(np.array(normData).shape)
+        housesIndicesToDrop = ro.removeOutlier(list(normData),freq.attributeData[len(freq.attributeData)-1])
+        housesIndicesToDrop = sorted(housesIndicesToDrop, reverse = True)
+        housesIndicesToDrop = list(housesIndicesToDrop)
+        for eachAttribute in normData:
+            for e in housesIndicesToDrop:
+                del eachAttribute[e]
+        #print(np.array(normData).shape)
+        plt.clf()
+        
     toCorrelate =  np.array(normData)
 
-    ##for each in toCorrelate:
-    ##    print(type(each[0]))
-    #print(toCorrelate[0])
 
     correlationValues = [ [] for each in freq.attributeData]
+    #indicesOfSTD0 = []
+    ### Iterate through normalized Data (with or without outliers)
     for ind, each in enumerate(toCorrelate):
-       # print('-'*30)
-       # print(str(ind) +" "+ str(freq.attributes[ind]))
-        corrs = np.corrcoef(toCorrelate[ind], freq.attributeData[len(freq.attributeData)-1])    
-        #print(corrs)
-        correlationValues[ind] = corrs[[0],[1]]
+        ### Find correlation of data to the salesPrice
+        if len(set(each))!=1:
+            corrs = np.corrcoef(toCorrelate[ind], toCorrelate[len(freq.attributeData)-1])            
+            correlationValues[ind] = corrs[[0],[1]]
+        
+    #indicesOfSTD0 = sorted(indicesOfSTD0)
 
-    ##plt.scatter(toCorrelate[1], freq.attributeData[len(freq.attributeData)-1])
-    ##plt.show()
+    
+
+    
+
+    ### Find most correlated
     mostCorrelated = []
     for i,each in enumerate(correlationValues):
-        if abs(each) >= abs(limit): #greater than (limit) correlation
+        if each == []:
+            pass
+        elif abs(each) >= abs(limit): #greater than (limit) correlation
+            
             mostCorrelated.append([i, each])
-            print(freq.attributes[i])
-    #print(mostCorrelated)
-    return mostCorrelated
+            if prints == True:
+                print(freq.attributes[i])
+    
+    return mostCorrelated ### this is -> array[(index, correlationValue)]
 
