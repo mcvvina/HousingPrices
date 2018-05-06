@@ -1,6 +1,7 @@
 import math
 import sys
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
 def normalize(toNorm, posValues):
     ####################################### USE MEDIANS INSTEAD OF MEAN
     
@@ -146,7 +147,7 @@ def normalize(toNorm, posValues):
                    toReturn[ind].append(0)
             
 
-            
+    toReturn =(MinMaxScaler((-1,1)).fit_transform(toReturn)).tolist()
     return toReturn
 
 

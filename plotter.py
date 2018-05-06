@@ -13,6 +13,7 @@ import itertools
 import pandas
 import normalize
 import removeOutlier as ro
+import numpy as np
 
 def plotter(freq, fig, backend, XindicesToPlot = [], YindicesToPlot = [], typ = 'histogram',removeOutliers = False ):
     subplot = fig.add_subplot(111)
@@ -104,6 +105,8 @@ def plotter(freq, fig, backend, XindicesToPlot = [], YindicesToPlot = [], typ = 
             for e in housesIndicesToDrop:
                 del eachAttribute[e]
         freqs = list(freqs)
+
+        
         plt.clf()
 
     if attr[0] == 'Id':

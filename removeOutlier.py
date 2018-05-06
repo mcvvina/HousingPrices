@@ -6,7 +6,7 @@ def _ro(x_data,y_data):
     x_data = x_data.copy()
     outliers = set()
     temps = list(x_data)
-    LineData = plt.boxplot(x_data)
+    LineData = plt.boxplot(x_data, whis = 8)
 ##    plt.show()
     outlierYVal = [each.get_ydata() for each in LineData.get('fliers')]
     for each in outlierYVal[0]:        
