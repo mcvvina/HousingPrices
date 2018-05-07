@@ -11,3 +11,23 @@ For the pages with plots, click on the plot itself to cycle through the plots.
 
 Ignore the warnings if any pop up. If the window shows "not responding" please wait.
 The GUI screen is not adjustable nor scrollable. We apologize for the inconvenience.
+
+1. cd into folder
+2. copy and paste following into terminal:
+pip install numpy
+pip install frequencies
+pip install scipy
+pip install normalize
+pip install matplotlib
+pip install removeOutlier
+pip install copy
+pip install correlation
+pip install histogram
+pip install requests
+pip install sys
+pip install itertools
+pip install sklearn
+pip install pandas
+pip install tkinter
+pip install plotter
+python view.py
