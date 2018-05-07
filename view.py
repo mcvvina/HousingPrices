@@ -1394,7 +1394,7 @@ class RidgeWithOutliers(tk.Frame):
                 testXData = copy.deepcopy(testData)
                 del testXData['Id']
                  
-                y_prediction=cff.predict(testXData)
+                y_prediction=cf.predict(testXData)
                 y_prediction = np.exp(y_prediction)
 
                 file = open('RidgeCVWithOutliers.txt','w')
@@ -1494,7 +1494,7 @@ class RidgeNoOutliers(tk.Frame):
         ##### WRITE OUT #####
         if choiceOfPrints:
             testXData = copy.deepcopy(testData)
-            del toTest['Id'] 
+            del testXData['Id'] 
                 
             y_prediction=cff.predict(testXData)
             y_prediction = np.exp(y_prediction)
@@ -2743,7 +2743,7 @@ class CombineRegressors(tk.Frame):
 
             if choiceOfPrints:
                  
-                y_prediction=kernRgpredictions
+                y_prediction=eNetpredictions
                 y_prediction = np.exp(y_prediction)
 
                 file = open('ElasticNetRobust-WOutliers.txt','w')
