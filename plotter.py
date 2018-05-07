@@ -155,6 +155,8 @@ def plotter(freq, fig, backend, XindicesToPlot = [], YindicesToPlot = [], typ = 
             if typ is 'histogram':
                 subplot.bar(ay,next(ys))
                 subplot.set_xticklabels(ay)
+                for tick in subplot.get_xticklabels():
+                    tick.set_rotation(45)
             elif typ is 'plot':
                 subplot.scatter(ay,salesPrice)
             
@@ -189,6 +191,8 @@ def plotter(freq, fig, backend, XindicesToPlot = [], YindicesToPlot = [], typ = 
         if typ is 'histogram':
             subplot.bar(oy,next(ys))
             subplot.set_xticklabels(oy)
+            for tick in subplot.get_xticklabels():
+                tick.set_rotation(45)
         elif typ is 'plot':
             subplot.scatter(oy,salesPrice)
     
