@@ -99,17 +99,18 @@ else:
     choiceOfPrints = False
 
     
-choiceOfScore = input("Type 'y' if you want the scores to be root mean squared error (note: VERY LONG COMPUTATION TIME).Default is mean accuracy\n")
+##choiceOfScore = input("Type 'y' if you want the scores to be root mean squared error (note: VERY LONG COMPUTATION TIME).Default is mean accuracy\n")
 def calcScore(model, X, Y):
+    choiceOfScore = "DEFAULT"
     if choiceOfScore is "y":
         return np.sqrt(-cross_val_score(model, (X), (Y), scoring = 'neg_mean_squared_error', cv = 5))
     else:
         return model.score(X,Y)
 
-if choiceOfScore is "y":
-    print("You selected: ROOT MEAN SQUARED ERROR. Please Wait until 'FINISHED' is printed.\n")
-else:
-    print("You selected: MEAN ACCURACY. Please Wait until 'FINISHED' is printed.\n")
+##if choiceOfScore is "y":
+##    print("You selected: ROOT MEAN SQUARED ERROR. Please Wait until 'FINISHED' is printed.\n")
+##else:
+##    print("You selected: MEAN ACCURACY. Please Wait until 'FINISHED' is printed.\n")
 
 
 target = pandas.DataFrame(data = freq.attributeData)
@@ -1886,7 +1887,7 @@ class LassoWithOutliers(tk.Frame):
                 file.close()
 
             #################!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            l
+            
             
             lassoPipeline = make_pipeline(RobustScaler(), linear_model.Lasso(alpha = 0.005, random_state=123)).fit(X_train, y_train)
 
