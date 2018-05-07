@@ -1540,8 +1540,8 @@ class LassoWithOutliers(tk.Frame):
             
             X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=0.3)
             #______________________________________________________________________________________________
-            label = tk.Label(self, text="Lasso", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="Lasso", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="Lasso(alpha = .10)",font=('Helvetica',14))
             label.pack()
             
@@ -1581,8 +1581,8 @@ class LassoWithOutliers(tk.Frame):
 
             #______________________________________________________________________________________________
             lars = linear_model.LassoLars(alpha = .10)
-            label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="LassoLars(alpha = .10)",font=('Helvetica',14))
             label.pack()
             lars.fit(X_train, y_train)
@@ -1620,8 +1620,8 @@ class LassoWithOutliers(tk.Frame):
                 file.close()
             
             #______________________________________________________________________________________________
-            label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="LassoLarsIC(criterion='bic')", font=('Helvetica',14))
             label.pack()
             
@@ -1663,8 +1663,8 @@ class LassoWithOutliers(tk.Frame):
             
             #______________________________________________________________________________________________
 
-            label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="LassoLarsIC(criterion='aic')", font=('Helvetica',14))
             label.pack()
             
@@ -1709,8 +1709,8 @@ class LassoWithOutliers(tk.Frame):
 
             lassoCV = linear_model.LassoCV(cv = 20).fit(X_train, y_train)
 
-            label = tk.Label(self, text="LassoCv", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="LassoCv", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="LassoCV(cv = 20)", font=('Helvetica',14))
             label.pack()
             label1 = ttk.Label(self,text = "lassoCV Train Score: " +str(calcScore(lassoCV,X_train,y_train)))
@@ -1748,8 +1748,8 @@ class LassoWithOutliers(tk.Frame):
 
             lassoLarsCv = linear_model.LassoLarsCV(cv = 20).fit(X_train, y_train)
 
-            label = tk.Label(self, text="lassoLarsCv", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="lassoLarsCv", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="LassoLarsCV(cv = 20)", font=('Helvetica',14))
             label.pack()
 
@@ -1785,8 +1785,8 @@ class LassoWithOutliers(tk.Frame):
                     file.write(str(printId[i])+","+str(printPred[i][0])+"\n")
 
                 file.close()
-            label = tk.Label(self, text="LassoPipeline", font=LARGE_FONT)
-            label.pack()
+##            label = tk.Label(self, text="LassoPipeline", font=LARGE_FONT)
+##            label.pack()
             label = tk.Label(self, text="make_pipeline(RobustScaler(), linear_model.Lasso(alpha = ___, random_state=123))", font=('Helvetica',14))
             label.pack()
             #################!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2000,8 +2000,8 @@ class LassoNoOutliers(tk.Frame):
             
         X_train, X_test, y_train, y_test = train_test_split(x,y,test_size=0.3)
         #______________________________________________________________________________________________
-        label = tk.Label(self, text="Lasso", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="Lasso", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="Lasso(alpha = 10.0)", font=('Helvetica',14))
         label.pack()
 
@@ -2038,8 +2038,8 @@ class LassoNoOutliers(tk.Frame):
             file.close()
 
         #______________________________________________________________________________________________
-        label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="LassoLars(alpha = 10.0)", font=('Helvetica',14))
         label.pack()
         
@@ -2077,8 +2077,8 @@ class LassoNoOutliers(tk.Frame):
         
         #______________________________________________________________________________________________
 
-        label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="LassoLarsIC(criterion='bic')", font=('Helvetica',14))
         label.pack()
 
@@ -2118,8 +2118,8 @@ class LassoNoOutliers(tk.Frame):
             file.close()
             
         #______________________________________________________________________________________________
-        label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoLarsIC", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="LassoLarsIC(criterion='aic')", font=('Helvetica',14))
         label.pack()
         
@@ -2161,8 +2161,8 @@ class LassoNoOutliers(tk.Frame):
         #______________________________________________________________________________________________
 
 
-        label = tk.Label(self, text="LassoCV", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoCV", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="Lasso(cv = 20)", font=('Helvetica',14))
         label.pack()
         
@@ -2205,8 +2205,8 @@ class LassoNoOutliers(tk.Frame):
         #______________________________________________________________________________________________
 
 
-        label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoLars", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="LassoLarsCV(cv = 20)", font=('Helvetica',14))
         label.pack()
         lassoLarsCv = linear_model.LassoLarsCV(cv = 20).fit(X_train, y_train)
@@ -2246,8 +2246,8 @@ class LassoNoOutliers(tk.Frame):
 
          #______________________________________________________________________________________________
 
-        label = tk.Label(self, text="LassoPipeline", font=LARGE_FONT)
-        label.pack()
+##        label = tk.Label(self, text="LassoPipeline", font=LARGE_FONT)
+##        label.pack()
         label = tk.Label(self, text="make_pipeline(RobustScaler(), linear_model.Lasso(alpha = 0.5, random_state=123))", font=('Helvetica',14))
         label.pack()
         lassoPipeline = make_pipeline(RobustScaler(), linear_model.Lasso(alpha = 0.5, random_state=123)).fit(X_train, y_train)
@@ -2843,21 +2843,48 @@ class CombineRegressors(tk.Frame):
             label1 = ttk.Label(self,text = "Average of [AdaBoost,RandomForest, elasticNet, kernelRidge, GradientBoostingRegressor]: " , font = LARGE_FONT)
             label1.pack()
 
-            
+            Adaprediction = robAB.predict(X_train)
+            RFpredictions = rff.predict(X_train)
+            eNetpredictions = eNetRob.predict(X_train)
+            kernRgpredictions = eNetRob.predict(X_train)
+            gradBoostPred = eNetRob.predict(X_train)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)      
 
+            
+            
+            label1 = ttk.Label(self,text = "Train Score (rmse): " +str(np.sqrt(mean_squared_error(y_train, averaged))))
+            label1.pack()
+
+            Adaprediction = robAB.predict(X_test)
+            RFpredictions = rff.predict(X_test)
+            eNetpredictions = eNetRob.predict(X_test)
+            kernRgpredictions = eNetRob.predict(X_test)
+            gradBoostPred = eNetRob.predict(X_test)
             averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
             averaged = np.mean(averaged, axis = 1)
-
-
             
-            label1 = ttk.Label(self,text = "Train Score: " +str(sqrt(mean_squared_error(y_train, averaged))))
-            label1.pack()
-            
-            label2 = ttk.Label(self,text = "Test Score: " +str(sqrt(mean_squared_error(y_test, averaged))))
+            label2 = ttk.Label(self,text = "Test Score (rmse): " +str(np.sqrt(mean_squared_error(y_test, averaged))))
             label2.pack()
 
-            label3 = ttk.Label(self,text = "Averaged Train Score on all training data: " +str(sqrt(mean_squared_error(y, averaged))))
+            Adaprediction = robAB.predict(x)
+            RFpredictions = rff.predict(x)
+            eNetpredictions = eNetRob.predict(x)
+            kernRgpredictions = eNetRob.predict(x)
+            gradBoostPred = eNetRob.predict(x)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
+            
+            label3 = ttk.Label(self,text = "Averaged Train Score on all training data (rmse): " +str(np.sqrt(mean_squared_error(y, averaged))))
             label3.pack()
+
+            Adaprediction = robAB.predict(toTest)
+            RFpredictions = rff.predict(toTest)
+            eNetpredictions = eNetRob.predict(toTest)
+            kernRgpredictions = eNetRob.predict(toTest)
+            gradBoostPred = eNetRob.predict(toTest)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
 
             if choiceOfPrints:
                  
@@ -2881,17 +2908,53 @@ class CombineRegressors(tk.Frame):
             
             label1 = ttk.Label(self,text = "Averaged With Modifications: averaged*.2+Adaprediction*.4+gradBoostPred*.2+RFpredictions*.2: ", font = LARGE_FONT )
             label1.pack()
-           
+
+            Adaprediction = robAB.predict(X_train)
+            RFpredictions = rff.predict(X_train)
+            eNetpredictions = eNetRob.predict(X_train)
+            kernRgpredictions = eNetRob.predict(X_train)
+            gradBoostPred = eNetRob.predict(X_train)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
             newAveraged = averaged*.2+Adaprediction*.4+gradBoostPred*.2+RFpredictions*.2
 
-            label1 = ttk.Label(self,text = "Train Score: " +str(sqrt(mean_squared_error(y_train, newAveraged))))
-            label1.pack()
             
-            label2 = ttk.Label(self,text = "Test Score: " +str(sqrt(mean_squared_error(y_test, newAveraged))))
+            
+            label1 = ttk.Label(self,text = "Train Score (rmse): " +str(np.sqrt(mean_squared_error(y_train, newAveraged))))
+            label1.pack()
+
+            Adaprediction = robAB.predict(X_test)
+            RFpredictions = rff.predict(X_test)
+            eNetpredictions = eNetRob.predict(X_test)
+            kernRgpredictions = eNetRob.predict(X_test)
+            gradBoostPred = eNetRob.predict(X_test)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
+            newAveraged = averaged*.2+Adaprediction*.4+gradBoostPred*.2+RFpredictions*.2
+            
+            label2 = ttk.Label(self,text = "Test Score  (rmse): " +str(np.sqrt(mean_squared_error(y_test, newAveraged))))
             label2.pack()
 
-            label3 = ttk.Label(self,text = "Modified Average  Train Score on all training data: " +str(sqrt(mean_squared_error(y, newAveraged))))
+            Adaprediction = robAB.predict(x)
+            RFpredictions = rff.predict(x)
+            eNetpredictions = eNetRob.predict(x)
+            kernRgpredictions = eNetRob.predict(x)
+            gradBoostPred = eNetRob.predict(x)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
+            newAveraged = averaged*.2+Adaprediction*.4+gradBoostPred*.2+RFpredictions*.2
+            
+            label3 = ttk.Label(self,text = "Modified Averaged Train Score on all training data (rmse): " +str(np.sqrt(mean_squared_error(y, newAveraged))))
             label3.pack()
+
+            Adaprediction = robAB.predict(toTest)
+            RFpredictions = rff.predict(toTest)
+            eNetpredictions = eNetRob.predict(toTest)
+            kernRgpredictions = eNetRob.predict(toTest)
+            gradBoostPred = eNetRob.predict(toTest)
+            averaged = np.column_stack([Adaprediction,RFpredictions,eNetpredictions,kernRgpredictions, gradBoostPred])
+            averaged = np.mean(averaged, axis = 1)
+            newAveraged = averaged*.2+Adaprediction*.4+gradBoostPred*.2+RFpredictions*.2
 
 ##            testXData = testData.copy()
 ##            del testXData['Id']
