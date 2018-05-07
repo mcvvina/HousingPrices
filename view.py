@@ -927,7 +927,7 @@ class AdaBoostRegressorWithOutliers(tk.Frame):
                 testXData = copy.deepcopy(testData)
                 del testXData['Id']
                  
-                y_prediction=robAB.predict(testXData)
+                y_prediction=cff.predict(testXData)
                 y_prediction = np.exp(y_prediction)
 
                 file = open('AdaBoostRegressorWithOutliers.txt','w')
